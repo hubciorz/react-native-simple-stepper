@@ -17,6 +17,7 @@ export default class SimpleStepper extends Component {
     imageHeight: PropTypes.number,
     imageWidth: PropTypes.number,
     activeOpacity: PropTypes.number,
+    disabled: PropTypes.bool,
     disabledOpacity: PropTypes.number,
     incrementImage: PropTypes.oneOfType([
       PropTypes.string,
@@ -43,6 +44,7 @@ export default class SimpleStepper extends Component {
     imageHeight: 36,
     imageWidth: 36,
     activeOpacity: 0.4,
+    disabled: false,
     disabledOpacity: 0.5
   }
   constructor(props) {
@@ -145,7 +147,7 @@ export default class SimpleStepper extends Component {
         activeOpacity={this.props.activeOpacity}
         style={[styles.leftButton, {borderColor: this.props.tintColor, padding: this.props.padding}]}
         onPress={this.decrementAction}
-        disabled={this.state.hasReachedMin}>
+        disabled={this.state.hasReachedMin || this.props.disabled}>
         <Image style={[decrementStyle, tintDecrementStyle, {opacity: this.state.decrementOpacity}]} source={decrementImageSrc} />
       </TouchableOpacity>
       <TouchableOpacity
@@ -153,7 +155,7 @@ export default class SimpleStepper extends Component {
         activeOpacity={this.props.activeOpacity}
         style={[styles.rightButton, {borderColor: this.props.tintColor, padding: this.props.padding}]}
         onPress={this.incrementAction}
-        disabled={this.state.hasReachedMax}>
+        disabled={this.state.hasReachedMax || this.props.disabled}>
         <Image style={[incrementStyle, tintIncrementStyle, {opacity: this.state.incrementOpacity}]} source={incrementImageSrc}  />
       </TouchableOpacity>
       </View>
